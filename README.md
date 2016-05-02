@@ -61,10 +61,14 @@ At this stage, I tried three different approaches to feature selection:
 
 #### Intuitive selection
 
-Intuitively, 
+ 
 
 #### Creation of the new feature ```total_compensation```
 
 
-#### 
+As I will show in the testing section, inclusion of 
+
+#### Univariate feature selection with SelectKBest
+
+
 
