@@ -11,25 +11,39 @@ This project applies machine learning techniques and algorithms to answer the qu
 
 #### Approach
 
+
 #### Key results
 
 
 ### 1. Data exploration
 
-At this stage, I explored the dataset with Enron data provided by Udacity.
+At this stage, I explored the Enron dataset provided by Udacity.
 
 Key findings were:
 - There are entries for 146 people in the dataset;
 - For each person in the dataset, there are 21 features;
-- 18 people in the dataset are a person of interest (POI);
-- The dataset also provides the identies of 35 known POI's.
+- The dataset reveals the identies of 35 known POI's;
+- 18 people in the dataset are labelled as a POI.
 
 ### 2. Outlier Investigation and Removal
 
-Here I plotted the values of features "bonus" and salary to identify outliers.
+Here I plotted the values of features "bonus" and "salary" to identify outliers.
 
-Before cleaning, the maximum values were
+Before cleaning, the maximum values of the two features were:
 
 ```Maximum bonus value before outlier removal: 97343619.0```
+
 ```Maximum salary value before outlier removal: 26704229.0```
+
+A look at exhbit enron61702insiderpay.pdf allowed me to identify two entries to be removed:
+
+- "TOTAL": a row containing the total of all rows, the likely outlier;
+- "THE TRAVEL AGENCY IN THE PARK": a seemingly valid entry that is however not a person.
+
+After removing these two entries from the dataset, the new maximum values were:
+
+```Maximum bonus value after outlier removal: 8000000.0```
+
+```Maximum salary value after outlier removal: 1111258.0```
+
 
