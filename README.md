@@ -6,7 +6,8 @@ This is project 5 of Udacity's Data Analyst Nanodegree, connected to the course 
 In 2000, Enron was one of the largest companies in the United States. By 2002, it had collapsed into bankruptcy due to widespread corporate fraud. In the resulting Federal investigation, there was a significant amount of typically confidential information entered into public record, including tens of thousands of emails and detailed financial data for top executives.
 
 ### Introduction
-### Aim of the project
+
+#### Aim of the project
 This project applies machine learning techniques and algorithms to answer the question: can the people behind the Enron fraud (aka persons of interest, or POI's) be identified on the basis of their emails and financial data?
 
 #### Approach
@@ -27,7 +28,7 @@ Key findings were:
 
 ### 2. Outlier Investigation and Removal
 
-Here I plotted the values of features "bonus" and "salary" to identify outliers.
+Here I plotted the values of features "bonus" and "salary" to identify outliers in the financial data.
 
 Before cleaning, the maximum values of the two features were:
 
@@ -39,12 +40,31 @@ Maximum salary value before outlier removal: 26704229.0
 A look at exhbit enron61702insiderpay.pdf allowed me to identify two entries to be removed:
 
 - "TOTAL": a row containing the total of all rows, the likely outlier;
-- "THE TRAVEL AGENCY IN THE PARK": a seemingly valid entry that is however not a person.
+- "THE TRAVEL AGENCY IN THE PARK": not an outlier, but an entry that is not a person.
+
+
 
 After removing these two entries from the dataset, the new maximum values were:
 
-```Maximum bonus value after outlier removal: 8000000.0```
+```
+Maximum bonus value after outlier removal: 8000000.0
+Maximum salary value after outlier removal: 1111258.0
+```
 
-```Maximum salary value after outlier removal: 1111258.0```
+### 3. Select and create new feature(s)
 
+At this stage, I tried three different approaches to feature selection:
+
+- Intuitive selection of the most important features in the data set;
+- Creation (and testing) of a new feature combining three existing features;
+- Univariate feature selection with the SelectKBest method in Scikit-learn.
+
+#### Intuitive selection
+
+Intuitively, 
+
+#### Creation of the new feature ```total_compensation```
+
+
+#### 
 
