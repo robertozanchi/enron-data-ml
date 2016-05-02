@@ -65,13 +65,18 @@ At this stage, I tried three different approaches to feature selection:
 
 #### Creation of the new feature ```total_compensation```
 
+##### Rationale for new feature creation
 
+I created ```total_compensation``` to be the sum of three exisitng financial features:
+```['salary', 'bonus', 'total_stock_value']```. I hypothesized that combining these three
+values would make a POI - who may be more likely that others to have higher values for
+any of these features - more easily identifiable.
 
 ##### Testing of new feature
 I tested the effect of the new feature ```total_compensation``` on the final algorithm
-performance. I found that Naive Bayes classification using the top 5 features including 
-```total_compensation``` scored lower in accuracy, precision and recall than when using
-the top 5 existing features found via SelectKBest.
+performance. I found that Naive Bayes classification using the top 5 SelectKBest features
+including ```total_compensation``` scored lower in accuracy, precision and recall than
+when using the top 5 existing features.
 
 ```
 GaussianNB()
@@ -83,9 +88,7 @@ Features ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salar
 Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050
 ```
 
-These results led me to 
-
-As I will show in the testing section, inclusion of 
+For this reason, I did not include ```total_compensation``` in the final feature set.
 
 #### Univariate feature selection with SelectKBest
 
