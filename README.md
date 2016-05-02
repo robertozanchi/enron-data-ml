@@ -1,4 +1,5 @@
 #Identify Fraud from Enron Email
+#### Roberto Zanchi
 
 This is project 5 of Udacity's Data Analyst Nanodegree, connected to the course Intro to Machine Learning.
 
@@ -7,7 +8,10 @@ In 2000, Enron was one of the largest companies in the United States. By 2002, i
 
 ## Introduction
 ### Aim of the project
-This project applies machine learning techniques and algorithms to perform data analysis and answer the following question: can the people behind the Enron fraud (aka persons of interest, or POI's) be identified on the basis of their emails and financial data?
+This project applies machine learning techniques and algorithms to answer the following question: can the people behind the Enron fraud (aka persons of interest, or POI's) be identified on the basis of their emails and financial data?
+
+### Approach
 
 ### Key results
+
 
