@@ -31,8 +31,10 @@ Here I plotted the values of features "bonus" and "salary" to identify outliers.
 
 Before cleaning, the maximum values of the two features were:
 
-```Maximum bonus value before outlier removal: 97343619.0
-Maximum salary value before outlier removal: 26704229.0```
+```
+Maximum bonus value before outlier removal: 97343619.0
+Maximum salary value before outlier removal: 26704229.0
+```
 
 A look at exhbit enron61702insiderpay.pdf allowed me to identify two entries to be removed:
 
