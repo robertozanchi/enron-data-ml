@@ -65,9 +65,13 @@ At this stage, I tried three different approaches to feature selection:
 
 #### Creation of the new feature ```total_compensation```
 
-When I tested the effect of the new feature ```total_compensation``` on the final algorithm performance,
-I found that Naive Bayes classification using the top 5 features resulted in lower accuracy, precision
-and recall scores than the top 5 existing features selected through SelectKBest.
+
+
+##### Testing of new feature
+I tested the effect of the new feature ```total_compensation``` on the final algorithm
+performance. I found that Naive Bayes classification using the top 5 features including 
+```total_compensation``` scored lower in accuracy, precision and recall than when using
+the top 5 existing features found via SelectKBest.
 
 ```
 GaussianNB()
