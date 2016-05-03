@@ -237,12 +237,13 @@ Total predictions: 14000; True positives: 499; False positives: 227; False negat
 
 - The predictions of who is a POI in the dataset using Naive Bayes had an accuracy of 85,46%. This is the extent to
 which predicted POIs and non-POIs match the actual data. In a dataset with a majority of non-POIs, any prediction 
-with a majority of non-POIs will achieve good accuracy, so this is not the most important metric.
-- Precision, which scored 48,88% in this dataset with Naive Bayes is a more important metric. It tells us that when
+with a majority of non-POIs will achieve good accuracy, so this may not be the most important metric.
+- Precision, which scored 48,88% in this dataset with Naive Bayes, is a more important metric. It tells us that when
 a person is predicted to be a POI, there's almost a 50% chance they actually will be. A person identified as POI 
-with this algorithm would require further investogation to be confirmed to be a POI.
+with this algorithm would require further investigation to be confirmed to be a POI. This is a direction for future 
+research.
 - Recall, which scored 38,05% in this dataset with Naive Bayes, indicates that the algorithm only "captures" 38%
 of the POIs in the dataset overall. This means that additional tools and methods need to be deployed in order to
-identify all the POIs - a possible direction for further research.
+identify all the POIs - another possible direction for further research.
 
 
