@@ -109,10 +109,11 @@ Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050
 
 ### 4. Algorithm selection and tuning
 #### Tested algorithms
-I tested three different algorithms for supervised learning: Naive Bayes, Decision Tree and
-Nearest Neighbors. Classifiers using these methods were trained on a subset of data (i.e. training
-data) and tested on another subset (i.e. testing data) to measure their accuracy in predicting
-which entries (people) may be POI's.
+I tested three different algorithms for supervised learning: Naive Bayes (```GaussianNB()```),
+Decision Tree (```DecisionTreeClassifier```) and Nearest Neighbors (```KNeighborsClassifier```).
+Classifiers using these methods were trained on a subset of data (i.e. training data) and
+tested on another subset (i.e. testing data) to measure their accuracy in predicting which
+entries (people) may be POI's.
 
 #### Parameter tuning
 Parameter tuning is the search for good and robust parameters for an algorithm. Tuning is
