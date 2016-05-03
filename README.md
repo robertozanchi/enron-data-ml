@@ -10,7 +10,14 @@ In 2000, Enron was one of the largest companies in the United States. By 2002, i
 This project applies machine learning techniques and algorithms to answer the question: can the people behind the Enron fraud (aka persons of interest, or POI's) be identified on the basis of their emails and financial data?
 
 #### Approach
+The approach is based on preparing the dataset, selecting the best features and best performing algorithm
+through testing. The following steps were taken:
 
+1. Data exploration
+2. Clean data by identifying and removing outliers
+3. Select best features for final analysis
+4. Try multiple algorithms and select one for final analysis
+5. Evaluate results
 
 #### Key results
 ### 1. Data exploration
