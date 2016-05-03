@@ -187,6 +187,9 @@ features_train, features_test, labels_train, labels_test = \
 I evaluated performance, precision and recall of my algorithms using Udacity's ```tester.py``` script. 
 These metrics can be defined as following:
 
+##### Accuracy, precision and recall
+The student articulates what those metrics measure in context of the project task.
+
 ##### Best result: Naive Bayes
 The best results came from using the Naive Bayes algorithm. This yielded accuracy of 0.85464, precision
 of 0.48876 and recall of 0.38050, all within the acceptable range for passing this project.
