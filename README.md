@@ -196,8 +196,8 @@ of 0.48876 and recall of 0.38050, all within the acceptable range for passing th
 ```
 # Naive Bayes on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
 GaussianNB()
-Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050 F1: 0.42789 F2: 0.39814
-Total predictions: 14000    True positives:  761    False positives:  796   False negatives: 1239   True negatives: 11204
+Accuracy: 0.85464; Precision: 0.48876; Recall: 0.38050; F1: 0.42789; F2: 0.39814
+Total predictions: 14000; True positives: 761; False positives: 796; False negatives: 1239; True negatives: 11204
 ```
 
 
