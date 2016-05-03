@@ -20,7 +20,7 @@ Key findings were:
 - There are entries for 146 people in the dataset;
 - For each person in the dataset, there are 21 features;
 - The dataset reveals the identies of 35 known POI's;
-- 18 people in the dataset are labelled as a POI.
+- 18 people in the dataset are labelled POI.
 
 ### 2. Outlier Investigation and Removal
 Here I plotted the values of features "bonus" and "salary" to identify outliers in the financial data.
@@ -44,18 +44,18 @@ Maximum bonus value after outlier removal: 8000000.0
 Maximum salary value after outlier removal: 1111258.0
 ```
 
-### 3. Select and create new feature(s)
+### 3. Feature selection/engineering
 At this stage, I tried three different approaches to feature selection:
 
 - Intuitive selection of the most important features in the data set;
 - Creation (and testing) of a new feature combining three existing features;
 - Univariate feature selection with the SelectKBest method in Scikit-learn.
 
-#### Intuitive selection
-A selection of feature for further analysis based on intuition alone would lead me to
-focus on the features that indicate (as shown below in ```features_list```):
+#### Intuitive selection of features
+A selection of features for further analysis based on intuition would lead me to
+focus on the those that indicate (as shown below in ```features_list```):
 - The financial compensation received by the person;
-- How much this person has communicated with POI's.
+- Communication between this person and POI's.
 
 ```
 features_list = ['poi', 'salary', 'to_messages', 'deferral_payments', 'total_payments', 
@@ -65,14 +65,27 @@ features_list = ['poi', 'salary', 'to_messages', 'deferral_payments', 'total_pay
                  'long_term_incentive', 'shared_receipt_with_poi', 'restricted_stock', 
                  'director_fees']
 ```
-A disadvantage of this approach is that it doesn't offer a method for shortlisting
-the features of greater significance. I therefore decide to apply the
-SelectKBest method to select the top 5 among the features selected using intuition,
-as described below.
+A disadvantage of this approach is that  - by itself - it doesn't offer a method for 
+shortlisting the features of greater significance. I therefore decide to apply the
+SelectKBest method to select the top 5 features from among thosr in ```features_list```.
+This process is described below.
+
+#### Univariate feature selection with SelectKBest
+To address the limitations of intuitive selection and improve the performance of the
+estmators I used SelectKBest, a method available within Scikit-learn that selects the
+best features based on univariate statistical tests. SelectKBest works by removing all
+but the k highest scoring features, where k is a parameter.
+
+In my model, I set k = 5 in order to retain variety in features but eliminate most (i.e. 17)
+of the least significant features. The top 5 selected through SelectKBest are:
+```
+['exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+```
+In addition to ```['poi']```, the above are the features I included in the final feature set.
 
 #### Creation of the new feature ```total_compensation```
 ##### Rationale for new feature creation
-I created ```total_compensation``` to be the sum of three exisitng financial features:
+I created ```total_compensation``` to be the sum of three existing financial features:
 ```['salary', 'bonus', 'total_stock_value']```. I hypothesized that combining these three
 values would make a POI - who may be more likely that others to have higher values for
 any of these features - more easily identifiable.
@@ -87,16 +100,14 @@ in the final feature set.
 ```
 GaussianNB()
 
-Features ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'total_compensation', 'salary']
+['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'total_compensation', 'salary']
 Accuracy: 0.83638   Precision: 0.44972   Recall: 0.28400 
 
-Features ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
 Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050
 ```
 
-#### Univariate feature selection with SelectKBest
-
-I limited the selection to 5 features to reduce the 
+### 4. Algorithm selection and tuning
 
 
 
