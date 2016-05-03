@@ -10,16 +10,28 @@ In 2000, Enron was one of the largest companies in the United States. By 2002, i
 This project applies machine learning techniques and algorithms to answer the question: can the people behind the Enron fraud (aka persons of interest, or POI's) be identified on the basis of their emails and financial data?
 
 #### Approach
-The approach is based on preparing the dataset, selecting the best features and best performing algorithm
-through testing. The following steps were taken:
+The approach I used to achieve the stated aim is based on cleaning the dataset, and the selecting
+the best features and the best performing algorithm through testing. The following steps were taken:
 
 1. Data exploration
 2. Clean data by identifying and removing outliers
 3. Select best features for final analysis
 4. Try multiple algorithms and select one for final analysis
-5. Evaluate results
+5. Evaluate the results
 
-#### Key results
+Steps 3, 4 and 5 were taken multiple times in an iterative fashion, to arrive at the best possible results.
+
+#### Conclusions
+In the final analysis, a Naive Bayes algorithm was used for supervised classification of POI's
+and trained on a selection of six features. The results achieved were: 
+```
+### Naive Bayes with features ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+GaussianNB()
+Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050 F1: 0.42789 F2: 0.39814
+```
+
+Conclusions and implications are discussed in section 6. Conclusions.  
+
 ### 1. Data exploration
 At this stage, I explored the Enron dataset provided by Udacity.
 
@@ -29,7 +41,7 @@ Key findings were:
 - The dataset reveals the identies of 35 known POI's;
 - 18 people in the dataset are labelled POI.
 
-### 2. Outlier Investigation and Removal
+### 2. Outlier investigation and removal
 Here I plotted the values of features "bonus" and "salary" to identify outliers in the financial data.
 
 Before cleaning, the maximum values of the two features were:
