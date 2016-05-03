@@ -5,8 +5,8 @@ This is project 5 of Udacity's Data Analyst Nanodegree, connected to the course 
 ### Background
 In 2000, Enron was one of the largest companies in the United States. By 2002, it had collapsed into bankruptcy due to widespread corporate fraud. In the resulting Federal investigation, there was a significant amount of typically confidential information entered into public record, including tens of thousands of emails and detailed financial data for top executives.
 
-### Introduction
-#### Aim of the project
+### Project summary
+#### Aim
 This project applies machine learning techniques and algorithms to answer the question: can the people behind the Enron fraud (aka persons of interest, or POI's) be identified on the basis of their emails and financial data?
 
 #### Approach
@@ -25,7 +25,7 @@ Steps 3, 4 and 5 were taken multiple times in an iterative fashion, to arrive at
 In the final analysis, a Naive Bayes algorithm was used for supervised classification of POI's
 and trained on a selection of six features. The results achieved were: 
 ```
-### Naive Bayes with features ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+### Naive Bayes on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
 GaussianNB()
 Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050 F1: 0.42789 F2: 0.39814
 ```
@@ -152,13 +152,25 @@ Accuracy: 0.80350   Precision: 0.27662  Recall: 0.23250
 DecisionTreeClassifier(min_samples_split=10)
 Accuracy: 0.81721   Precision: 0.33233  Recall: 0.27700
 ```
-All other things being equal, setting min_samples_split=10 on Decision Tree yields the best accuracy,
-precision and recall results.
+Setting ```min_samples_split=10``` on Decision Tree yields the best accuracy, precision and recall
+results for that algorithm. However, even with tuning, Decision Tree is not the best performing method.
 
 #### Final algorithm selection
 The algorithm selected for final analysis is Naive Bayes, i.e. GaussianNB() in Scikit-learn. The reason
 for this selection are the results achieved in the evaluation and validation phase, discussed below.
 
 ### 5. Evaluation and validation
+Validation is key in order to determine how effective the chosen emthods are in solving the data problem.
+In ths case, we wanted to choose the most effective among three supervised learning methods at predicting
+which people in the dataset are likely to be POI's.
+
+Evaluation of results was perfomed multiple times in an iterative fashion in order to identify the best
+performing of the three selected algorithms and the effect of parameter tuning. It entailed two steps:
+
+1. Splitting the data into training and testing sets
+2. Calculating accuracy, precision and recall scores
+
+#### Splitting the data into training and testing sets
+
 
 
