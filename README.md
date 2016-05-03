@@ -160,17 +160,27 @@ The algorithm selected for final analysis is Naive Bayes, i.e. GaussianNB() in S
 for this selection are the results achieved in the evaluation and validation phase, discussed below.
 
 ### 5. Evaluation and validation
-Validation is key in order to determine how effective the chosen emthods are in solving the data problem.
-In ths case, we wanted to choose the most effective among three supervised learning methods at predicting
-which people in the dataset are likely to be POI's.
+Validation is needed to determine how effective the chosen methods are in solving the data problem.
+Here we wanted to choose the most effective among three supervised learning algorithms at predicting
+which people in the dataset are likely to be POI's, a classification problem.
 
 Evaluation of results was perfomed multiple times in an iterative fashion in order to identify the best
-performing of the three selected algorithms and the effect of parameter tuning. It entailed two steps:
+performing of the three selected algorithms and the effect of parameter tuning. This entailed two steps:
 
-1. Splitting the data into training and testing sets
-2. Calculating accuracy, precision and recall scores
+1. Split the data into training and testing sets
+2. Calculate accuracy, precision and recall scores
 
-#### Splitting the data into training and testing sets
+#### Split the data into training and testing sets
+The basis for supervised learning is the use of part of the data in the dataset to train a algorithm
+and then test its effectivenesss on the remaining subset, i.e. training set. The algorthm's predictions
+are then compared with the known information about the training set to measure its accuracy.
 
+I used the ```train_test_split``` method in Scikit-learn to split the data into training and test sets
+as following:
+```
+from sklearn.cross_validation import train_test_split
+features_train, features_test, labels_train, labels_test = \
+    train_test_split(features, labels, test_size=0.3, random_state=42)
+```
 
-
+#### Calculate accuracy, precision and recall scores
