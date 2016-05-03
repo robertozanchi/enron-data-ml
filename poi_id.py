@@ -26,8 +26,9 @@ from tester import dump_classifier_and_data
 features_list = ['poi', 'salary', 'to_messages', 'deferral_payments', 'total_payments', 
                  'loan_advances', 'bonus', 'restricted_stock_deferred', 'deferred_income',
                  'total_stock_value', 'expenses', 'from_poi_to_this_person', 
-                 'exercised_stock_options', 'from_messages', 'other', 'from_this_person_to_poi', 
-                 'long_term_incentive', 'shared_receipt_with_poi', 'restricted_stock', 'director_fees'] 
+                 'exercised_stock_options', 'from_messages', 'from_this_person_to_poi', 
+                 'long_term_incentive', 'shared_receipt_with_poi', 'restricted_stock', 
+                 'director_fees'] 
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
@@ -124,7 +125,7 @@ print "Maximum bonus value after outlier removal: " + str(bonus_max)
 print "Maximum salary value after outlier removal: " + str(salary_max)
 
 
-### Task 3: Create new feature(s)
+### Task 3: Select and create new feature(s)
 
 ### Store to my_dataset for easy export below.
 my_dataset = data_dict
