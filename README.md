@@ -185,16 +185,26 @@ features_train, features_test, labels_train, labels_test = \
 
 #### Calculate accuracy, precision and recall scores
 I evaluated performance, precision and recall of my algorithms using Udacity's ```tester.py``` script. 
-These metrics can be defined as following:
 
 ##### Accuracy, precision and recall
-The student articulates what those metrics measure in context of the project task.
+These metrics can be defined as following:
+
+- Accuracy is the extent to which the set of labels predicted for a sample exactly matches the 
+corresponding set of labels in the testing set.
+- Precision is the ratio ```tp / (tp + fp)``` where ```tp``` is the number of true positives and ```fp```
+the number of false positives.
+- Recall is the ratio ```tp / (tp + fn)``` where ```tp``` is the number of true positives and ```fn```
+the number of false negatives.
+
+The precision is intuitively the ability of the classifier not to label as positive a sample that is negative.
+In other words, how exact the prediction is when it reports a POI in this case.
+
+The recall is intuitively the ability of the classifier to find all the positive samples. In order words, how
+complete the prediction is in reporting all POIs, in this case.
 
 ##### Best result: Naive Bayes
 The best results came from using the Naive Bayes algorithm. This yielded accuracy of 0.85464, precision
 of 0.48876 and recall of 0.38050, all within the acceptable range for passing this project.
-
-
 ```
 # Naive Bayes on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
 GaussianNB()
@@ -224,5 +234,15 @@ Total predictions: 14000; True positives: 499; False positives: 227; False negat
 ```
 
 ### Conclusions
+
+- The predictions of who is a POI in the dataset using Naive Bayes had an accuracy of 85,46%. This is the extent to
+which predicted POIs and non-POIs match the actual data. In a dataset with a majority of non-POIs, any prediction 
+with a majority of non-POIs will achieve good accuracy, so this is not the most important metric.
+- Precision, which scored 48,88% in this dataset with Naive Bayes is a more important metric. It tells us that when
+a person is predicted to be a POI, there's almost a 50% chance they actually will be. A person identified as POI 
+with this algorithm would require further investogation to be confirmed to be a POI.
+- Recall, which scored 38,05% in this dataset with Naive Bayes, indicates that the algorithm only "captures" 38%
+of the POIs in the dataset overall. This means that additional tools and methods need to be deployed in order to
+identify all the POIs - a possible direction for further research.
 
 
