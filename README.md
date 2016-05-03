@@ -44,7 +44,7 @@ Maximum bonus value after outlier removal: 8000000.0
 Maximum salary value after outlier removal: 1111258.0
 ```
 
-### 3. Feature selection/engineering
+### 3. Feature selection and engineering
 At this stage, I tried three different approaches to feature selection:
 
 - Intuitive selection of the most important features in the data set;
@@ -94,7 +94,7 @@ any of these features - more easily identifiable.
 I tested the effect of the new feature ```total_compensation``` on the final algorithm
 performance. I found that Naive Bayes classification using the top 5 SelectKBest features
 including ```total_compensation``` scored lower in accuracy, precision and recall than
-when using the top 5 existing features. So I decided not to include ```total_compensation```
+the selection only using existing features. I decided not to include ```total_compensation```
 in the final feature set.
 
 ```
@@ -108,6 +108,37 @@ Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050
 ```
 
 ### 4. Algorithm selection and tuning
+#### Tested algorithms
+I tested three different algorithms for supervised learning: Naive Bayes, Decision Tree and
+Nearest Neighbors. Classifiers using these methods were trained on a subset of data (i.e. training
+data) and tested on another subset (i.e. testing data) to measure their accuracy in predicting
+which entries (people) may be POI's.
 
+#### Parameter tuning
+Parameter tuning is the search for good and robust parameters for an algorithm. Tuning is
+important in order to find the best results for a given problem.
+
+In my model, I tested three different setting for the ```min_samples_split``` parameter in the 
+Decision Tree algorithm. In addition to the default value of ```min_samples_split = 2```, I tested
+```min_samples_split = 5``` and ```min_samples_split = 10```, with the following results in testing:
+
+```
+DecisionTreeClassifier(min_samples_split=2)
+Accuracy: 0.79593   Precision: 0.27763  Recall: 0.26750
+
+DecisionTreeClassifier(min_samples_split=5)
+Accuracy: 0.80350   Precision: 0.27662  Recall: 0.23250
+
+DecisionTreeClassifier(min_samples_split=10)
+Accuracy: 0.81721   Precision: 0.33233  Recall: 0.27700
+```
+All other things being equal, setting min_samples_split=10 on Decision Tree yields the best accuracy,
+precision and recall results.
+
+#### Final algorithm selection
+The algorithm selected for final analysis is Naive Bayes, i.e. GaussianNB() in Scikit-learn. The reason
+for this selection are the results achieved in the evaluation and validation phase, discussed below.
+
+### 5. Evaluation and validation
 
 
