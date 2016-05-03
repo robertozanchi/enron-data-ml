@@ -175,8 +175,8 @@ The basis for supervised learning is the use of part of the data in the dataset 
 and then test its effectivenesss on the remaining subset, i.e. training set. The algorthm's predictions
 are then compared with the known information about the training set to measure its accuracy.
 
-I used the ```train_test_split``` method in Scikit-learn to split the data into training and test sets
-as following:
+I used the ```train_test_split``` method in Scikit-learn to split the data into training and test sets,
+which I then used for training and testing in all three algorithms.
 ```
 from sklearn.cross_validation import train_test_split
 features_train, features_test, labels_train, labels_test = \
@@ -184,3 +184,11 @@ features_train, features_test, labels_train, labels_test = \
 ```
 
 #### Calculate accuracy, precision and recall scores
+
+
+#### Validation results for tested algorithms
+
+
+### Conclusions
+
+
