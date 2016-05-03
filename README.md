@@ -199,7 +199,25 @@ GaussianNB()
 Accuracy: 0.85464; Precision: 0.48876; Recall: 0.38050; F1: 0.42789; F2: 0.39814
 Total predictions: 14000; True positives: 761; False positives: 796; False negatives: 1239; True negatives: 11204
 ```
-
+The best results achieved with Decision Tree and Nearest Neighbors did not meet the requrements
+for this project.
+```
+# Decision tree on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
+                       max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+                       min_samples_split=10, min_weight_fraction_leaf=0.0,
+                       presort=False, random_state=None, splitter='best')
+Accuracy: 0.81721; Precision: 0.33233; Recall: 0.27700; F1: 0.30215; F2: 0.28654
+Total predictions: 14000; True positives: 554; False positives: 1113   False negatives: 1446   True negatives: 10887
+```
+```
+# Nearest neighbors on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+                     metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+                     weights='uniform')
+Accuracy: 0.87657; Precision: 0.68733; Recall: 0.24950; F1: 0.36610; F2: 0.28593
+Total predictions: 14000; True positives: 499; False positives: 227; False negatives: 1501; True negatives: 11773
+```
 
 ### Conclusions
 
