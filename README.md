@@ -257,8 +257,8 @@ The recall is intuitively the ability of the classifier to find all the positive
 complete the prediction is in reporting all POIs, in this case.
 
 ##### Best result: Naive Bayes
-The best results came from using the Naive Bayes algorithm. This yielded accuracy of 0.85464, precision
-of 0.48876 and recall of 0.38050, all within the acceptable range for passing this project.
+The best results came from using the Naive Bayes algorithm. This yielded accuracy of 0.85393, precision
+of 0.48327 and recall of 0.32500, all within the acceptable range for passing this project.
 ```
 # Naive Bayes on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'restricted_stock']
 GaussianNB()
