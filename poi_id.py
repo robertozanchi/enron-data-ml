@@ -23,19 +23,17 @@ from tester import dump_classifier_and_data
 ### Task 1: Select what features you'll use.
 ### features_list is a list of strings, each of which is a feature name.
 ### The first feature must be "poi".
-features_list = ['poi', 'salary', 'to_messages', 'deferral_payments', 'total_payments', 
-                 'loan_advances', 'bonus', 'restricted_stock_deferred', 'deferred_income',
-                 'total_stock_value', 'expenses', 'from_poi_to_this_person', 
-                 'exercised_stock_options', 'from_messages', 'from_this_person_to_poi', 
-                 'long_term_incentive', 'shared_receipt_with_poi', 'restricted_stock', 
-                 'director_fees'] 
+features_list = ['poi', 'total_stock_value', 'total_payments', 'restricted_stock', 
+                 'exercised_stock_options', 'salary', 'expenses', "other", 'to_messages',
+                 'shared_receipt_with_poi', 'from_messages', 'from_this_person_to_poi',
+                 'from_poi_to_this_person', 'bonus']
 
 ### Load the dictionary containing the dataset
 with open("final_project_dataset.pkl", "r") as data_file:
     data_dict = pickle.load(data_file)
 
 ### Load the dictionary containing the dataset
-enron_data = pickle.load(open("final_project_dataset.pkl", "r") )
+#enron_data = pickle.load(open("final_project_dataset.pkl", "r") )
 
 ### Load all "person of interest" (POI) names
 all_poi = open("poi_names.txt", "r")
@@ -55,8 +53,10 @@ people = len(data_dict)
 print "There are entries for " + str(people) + " people in the dataset."
 
 ### Number of features in the dataset
-features = len(data_dict['SKILLING JEFFREY K'])
-print "For each person in the dataset, there are " + str(features) + " features."
+all_features = data_dict['SKILLING JEFFREY K'].keys()
+number_features = len(all_features)
+print "For each person in the dataset, there are " + str(number_features) + " features:"
+print all_features
 
 ### Number of POI's in the dataset
 def poi_count(data):
@@ -74,8 +74,17 @@ rfile = all_poi.readlines()
 poi = len(rfile[2:])
 print "A total of " + str(poi) + " people are known to be a POI."
 
+### Features with NaN values
+# Counts percentage of NaN for a feature
+# def count_nan(data, feature):
+#     count = 0
+#     for entry in data:
+#         if data[entry][feature] == 'NaN':
+#             count = count + 1
+#     print feature, ": ", str(float(count)/people)
 
-### Task 2: Remove outliers
+# for feature in all_features:
+#     print count_nan(data_dict, feature)
 
 print ""
 print "2. Outlier Investigation and Removal"
@@ -133,7 +142,7 @@ my_dataset = data_dict
 print ""
 print "3. Feature Engineering and Selection"
 print ""
-print "Intuitive selection of features:"
+print "First selection of features with least NaN values:"
 print features_list
 
 print ""
@@ -159,33 +168,41 @@ for record in my_dataset:
 data = featureFormat(my_dataset, features_list, sort_keys = True)
 labels, features = targetFeatureSplit(data)
 
-### Scale features
+### Scale features for use with Nearest Neighbors algorithm
 scaler = MinMaxScaler()
 features = scaler.fit_transform(features)
 
 ### K-best features
-k_best = SelectKBest(k=5)
+k_best = SelectKBest()
 k_best.fit(features, labels)
 
 results_list = zip(k_best.get_support(), features_list[1:], k_best.scores_)
 results_list = sorted(results_list, key=lambda x: x[2], reverse=True)
 
 print ""
-print "'K-best features' selection:"
+print "'K-best features ranking:"
 print results_list
 
-### Select top 5 K-best features
+### Select top k-best features
 print ""
-print "Selecting top 5 K-best-scoring features..."
-top_5_features = []
-count = 1
-for result in results_list:
-	if count <= 5:
-		top_5_features.append(result[1])
-	count = count + 1
-print top_5_features
+print "Selecting top k best-scoring features..."
 
-features_list = ["poi"] + top_5_features
+def top_features(number):
+    top_features = []
+    count = 1
+    for result in results_list:
+        if count <= number:
+            top_features.append(result[1])
+        count = count + 1
+    return top_features
+
+### Pull to k features that will be added to "poi" in final selection
+top_features = top_features(5)
+
+### Features selected for final analysis
+features_list = ["poi"] + top_features
+print top_features
+
 print ""
 print "Features selected for final analysis:"
 print features_list
@@ -216,8 +233,12 @@ clf.fit(features_train, labels_train)
 pred = clf.predict(features_test)
 ### calculate and return the accuracy on the test data
 accuracy = accuracy_score(labels_test, pred)
+precision = precision_score(labels_test, pred)
+recall = recall_score(labels_test, pred)
 print ""
 print "Accuracy of Naive Bayes classifier: ", accuracy
+print "Precision of Naive Bayes classifier: ", precision
+print "Recall of Naive Bayes classifier: ", recall
 
 # 2. Decision Tree
 ### import the sklearn module for DecisionTreeClassifier and create classifier

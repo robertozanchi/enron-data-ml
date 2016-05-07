@@ -45,7 +45,7 @@ Key findings were:
 
 #### Missing values
 The table below shows the ratio of missing "NaN" values from the dataset for each feature.
-Features (except for ```poi```) have missing values to the tune of between 13.7% and 97.3%.
+20 features (all except for ```poi```) have missing values to the tune of between 13.7% and 97.3%.
 
 | Features                  | NaN (ratio)     |
 | :------------------------ | --------------: |
@@ -97,41 +97,62 @@ Maximum salary value after outlier removal: 1111258.0
 ### 3. Feature selection and engineering
 At this stage, I tried three different approaches to feature selection:
 
-- Intuitive selection of the most important features in the data set;
+- First selection based least number of missing values;
 - Creation (and testing) of a new feature combining three existing features;
-- Univariate feature selection with the SelectKBest method in Scikit-learn.
+- Univariate feature selection with the SelectKBest method in Scikit-learn;
+- I also used feature scaling to use k-Nearest Neighbors effectively.
 
-#### Intuitive selection of features
-A selection of features for further analysis based on intuition would lead me to
-focus on the those that indicate (as shown below in ```features_list```):
-- The financial compensation received by the person;
-- Communication between this person and POI's.
-
+#### First selection of features based on missing values
+A first selection of features for further analysis is made based on how many missing
+values the features have. I choose to retain the features that have at most 50% of NaN.
+These are shown below in ```features_list```:
 ```
-features_list = ['poi', 'salary', 'to_messages', 'deferral_payments', 'total_payments', 
-                 'loan_advances', 'bonus', 'restricted_stock_deferred', 'deferred_income',
-                 'total_stock_value', 'expenses', 'from_poi_to_this_person', 
-                 'exercised_stock_options', 'from_messages', 'from_this_person_to_poi', 
-                 'long_term_incentive', 'shared_receipt_with_poi', 'restricted_stock', 
-                 'director_fees']
+features_list = ['poi', 'total_stock_value', 'total_payments', 'restricted_stock', 
+                 'exercised_stock_options', 'salary', 'expenses', "other", 'to_messages',
+                 'shared_receipt_with_poi', 'from_messages', 'from_this_person_to_poi',
+                 'from_poi_to_this_person', 'bonus']
 ```
-A disadvantage of this approach is that  - by itself - it doesn't offer a method for 
-shortlisting the features of greater significance. I therefore decide to apply the
-SelectKBest method to select the top 5 features from among thosr in ```features_list```.
+A limitation of this approach is that  - by itself - it doesn't offer a method for 
+finding the number the features that will produce better results. I decide to apply the
+SelectKBest method to select the top features from among those in ```features_list```.
 This process is described below.
 
 #### Univariate feature selection with SelectKBest
-To address the limitations of intuitive selection and improve the performance of the
-estmators I used SelectKBest, a method available within Scikit-learn that selects the
+To address the limitations of the first selection and improve the performance of the
+estimators I used SelectKBest, a method available within Scikit-learn that selects the
 best features based on univariate statistical tests. SelectKBest works by removing all
 but the k highest scoring features, where k is a parameter.
 
-In my model, I set k = 5 in order to retain variety in features but eliminate most (i.e. 17)
-of the least significant features. The top 5 selected through SelectKBest are:
+To select the top best features, I:
+
+- Ranked all 14 preselected features using ```SelectKBest()```
+- Tested accuracy, precision and recall of final model at different levels of k
+- Finally chose k = 6, to maximise all scores, as shown in the table below
+
+Performance of GaussianNB() at different k levels, selected with ```SelectKBest()```
+
+| k  | Accuracy  | Precision  | Recall  |
+| :- | --------: | ---------: | ------: |
+| 2  |   0.90409 |    0.46055 | 0.32100 |
+| 3  |   0.84069 |    0.46889 | 0.26750 |
+| 4  |   0.84300 |    0.48581 | 0.35100 |
+| 5  |   0.84677 |    0.50312 | 0.32300 |
+| 6  |   0.85393 |    0.48327 | 0.32500 |
+| 7  |   0.85293 |    0.41227 | 0.24200 |
+| 8  |   0.84453 |    0.37309 | 0.24400 |
+| 9  |   0.84267 |    0.36425 | 0.24150 |
+| 10 |   0.84267 |    0.36446 | 0.24200 |
+| 11 |   0.84027 |    0.34109 | 0.21250 |
+| 12 |   0.84000 |    0.33793 | 0.20850 |
+| 13 |   0.83287 |    0.30455 | 0.19750 |
+| 14 |   0.83353 |    0.30781 | 0.19900 |
+
+
+The top 5 selected through SelectKBest are:
 ```
-['exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+Features selected for final analysis:
+['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary']
 ```
-In addition to ```['poi']```, the above are the features I included in the final feature set.
 
 #### Creation of the new feature ```total_compensation```
 ##### Rationale for new feature creation
@@ -156,6 +177,9 @@ Accuracy: 0.83638   Precision: 0.44972   Recall: 0.28400
 ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
 Accuracy: 0.85464   Precision: 0.48876  Recall: 0.38050
 ```
+
+#### Feature scaling
+I also used feature scaling, required by the Nearest Neighbors algorithm (see next section).
 
 ### 4. Algorithm selection and tuning
 #### Tested algorithms
@@ -237,43 +261,46 @@ complete the prediction is in reporting all POIs, in this case.
 The best results came from using the Naive Bayes algorithm. This yielded accuracy of 0.85464, precision
 of 0.48876 and recall of 0.38050, all within the acceptable range for passing this project.
 ```
-# Naive Bayes on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+# Naive Bayes on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'restricted_stock']
 GaussianNB()
-Accuracy: 0.85464; Precision: 0.48876; Recall: 0.38050; F1: 0.42789; F2: 0.39814
-Total predictions: 14000; True positives: 761; False positives: 796; False negatives: 1239; True negatives: 11204
+Accuracy: 0.85393; Precision: 0.48327; Recall: 0.32500; F1: 0.38864; F2: 0.34778
+Total predictions: 14000; True positives: 650; False positives: 695; False negatives: 1350; True negatives: 11305
 ```
 
 ##### Other algorithms: Decision Tree and Nearest Neighbors
 The best results achieved with Decision Tree and Nearest Neighbors did not meet the requrements
 for this project.
 ```
-# Decision tree on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+# Decision tree on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'restricted_stock']
 DecisionTreeClassifier(class_weight=None, criterion='gini', max_depth=None,
-                       max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
-                       min_samples_split=10, min_weight_fraction_leaf=0.0,
-                       presort=False, random_state=None, splitter='best')
-Accuracy: 0.81721; Precision: 0.33233; Recall: 0.27700; F1: 0.30215; F2: 0.28654
-Total predictions: 14000; True positives: 554; False positives: 1113   False negatives: 1446   True negatives: 10887
+            max_features=None, max_leaf_nodes=None, min_samples_leaf=1,
+            min_samples_split=10, min_weight_fraction_leaf=0.0,
+            presort=False, random_state=None, splitter='best')
+
+Accuracy: 0.81307; Precision: 0.30462; Recall: 0.24050; F1: 0.26879; F2: 0.25107
+Total predictions: 14000; True positives: 481; False positives: 1098; False negatives: 1519; True negatives: 10902
 ```
+
 ```
-# Nearest neighbors on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'deferred_income']
+# Nearest neighbors on ['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'restricted_stock']
 KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
-                     metric_params=None, n_jobs=1, n_neighbors=5, p=2,
-                     weights='uniform')
-Accuracy: 0.87657; Precision: 0.68733; Recall: 0.24950; F1: 0.36610; F2: 0.28593
-Total predictions: 14000; True positives: 499; False positives: 227; False negatives: 1501; True negatives: 11773
+           metric_params=None, n_jobs=1, n_neighbors=5, p=2,
+           weights='uniform')
+
+Accuracy: 0.86986; Precision: 0.59933; Recall: 0.26850; F1: 0.37086; F2: 0.30182
+Total predictions: 14000; True positives: 537; False positives: 359; False negatives: 1463; True negatives: 11641
 ```
 
 ### Conclusions
 
-- The predictions of who is a POI in the dataset using Naive Bayes had an accuracy of 85,46%. This is the extent to
+- The predictions of who is a POI in the dataset using Naive Bayes had an accuracy of 85.39%. This is the extent to
 which predicted POIs and non-POIs match the actual data. In a dataset with a majority of non-POIs, any prediction 
 with a majority of non-POIs will achieve good accuracy, so this may not be the most important metric.
-- Precision, which scored 48,88% in this dataset with Naive Bayes, is a more important metric. It tells us that when
+- Precision, which scored 48.33% in this dataset with Naive Bayes, is a more important metric. It tells us that when
 a person is predicted to be a POI, there's almost a 50% chance they actually will be. A person identified as POI 
 with this algorithm would require further investigation to be confirmed to be a POI. This is a direction for future 
 research.
-- Recall, which scored 38,05% in this dataset with Naive Bayes, indicates that the algorithm only "captures" 38%
+- Recall, which scored 38.86% in this dataset with Naive Bayes, indicates that the algorithm only "captures" 39%
 of the POIs in the dataset overall. This means that additional tools and methods need to be deployed in order to
 identify all the POIs - another possible direction for further research.
 
