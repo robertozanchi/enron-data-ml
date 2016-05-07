@@ -35,11 +35,42 @@ Conclusions and implications are discussed in section 6. Conclusions.
 ### 1. Data exploration
 At this stage, I explored the Enron dataset provided by Udacity.
 
+#### Key findings in data exploration
 Key findings were:
 - There are entries for 146 people in the dataset;
 - For each person in the dataset, there are 21 features;
+- 20 out of 21 features have missing values - see table below;
 - The dataset reveals the identies of 35 known POI's;
 - 18 people in the dataset are labelled POI.
+
+#### Missing values
+The table below shows the ratio of missing "NaN" values from the dataset for each feature.
+Features (except for ```poi```) have missing values to the tune of between 13.7% and 97.3%.
+
+| Features                  | NaN (ratio)     |
+| :------------------------ | --------------: |
+| poi                       |             0.0 |
+| total_stock_value         |          0.1369 |
+| total_payments            |          0.1438 |
+| email_address             |          0.2397 |
+| restricted_stock          |          0.2466 |
+| exercised_stock_options   |          0.3014 |
+| salary                    |          0.3493 |
+| expenses                  |          0.3493 |
+| other                     |          0.3630 |
+| to_messages               |          0.4110 |
+| shared_receipt_with_poi   |          0.4110 |
+| from_messages             |          0.4110 |
+| from_this_person_to_poi   |          0.4110 |
+| from_poi_to_this_person   |          0.4110 |
+| bonus                     |          0.4384 |
+| long_term_incentive       |          0.5479 | 
+| deferred_income           |          0.6644 |
+| deferral_payments         |          0.7329 |
+| restricted_stock_deferred |          0.8767 |
+| director_fees             |          0.8836 |
+| loan_advances             |          0.9726 |
+
 
 ### 2. Outlier investigation and removal
 Here I plotted the values of features "bonus" and "salary" to identify outliers in the financial data.
