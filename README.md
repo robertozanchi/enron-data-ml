@@ -299,7 +299,7 @@ with a majority of non-POIs will achieve good accuracy, so this may not be the m
 a person is predicted to be a POI, there's almost a 50% chance they actually will be. A person identified as POI 
 with this algorithm would require further investigation to be confirmed to be a POI. This is a direction for future 
 research.
-- Recall, which scored 38.86% in this dataset with Naive Bayes, indicates that the algorithm only "captures" 39%
+- Recall, which scored 32.50% in this dataset with Naive Bayes, indicates that the algorithm only "captures" 39%
 of the POIs in the dataset overall. This means that additional tools and methods need to be deployed in order to
 identify all the POIs - another possible direction for further research.
 
