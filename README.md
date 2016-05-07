@@ -97,12 +97,12 @@ Maximum salary value after outlier removal: 1111258.0
 ### 3. Feature selection and engineering
 At this stage, I tried three different approaches to feature selection:
 
-- First selection based least number of missing values;
-- Creation (and testing) of a new feature combining three existing features;
+- First selection of features with least missing values;
 - Univariate feature selection with the SelectKBest method in Scikit-learn;
+- Creation (and testing) of a new feature combining three existing features;
 - I also used feature scaling to use k-Nearest Neighbors effectively.
 
-#### First selection of features based on missing values
+#### First selection of features with least missing values
 A first selection of features for further analysis is made based on how many missing
 values the features have. I choose to retain the features that have at most 50% of NaN.
 These are shown below in ```features_list```:
@@ -147,10 +147,10 @@ Performance of GaussianNB() at different k levels, selected with ```SelectKBest(
 | 13   |   0.83287 |    0.30455 | 0.19750 |
 | 14   |   0.83353 |    0.30781 | 0.19900 |
 
-The top features selected through SelectKBest at k = 6 are:
+The top 6 features selected through SelectKBest are:
 ```
 Features selected for final analysis:
-['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary']
+['poi', 'exercised_stock_options', 'total_stock_value', 'bonus', 'salary', 'restricted_stock']
 ```
 
 #### Creation of the new feature ```total_compensation```
